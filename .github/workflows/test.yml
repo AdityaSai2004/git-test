@@ -24,6 +24,7 @@ jobs:
       
       - name: Clone Repository into SageMaker Instance
         run: |
-          ssh -i ${{ env.SPRIVATE_KEY }} ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -i private_key ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
           echo "hello world"
       
