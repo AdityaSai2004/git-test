@@ -1,24 +1,26 @@
-name: SageMaker Notebook Workflow
+name: Run SageMaker Script
 
 on:
-  workflow_dispatch: # Manually triggered workflow
-  schedule:
-    - cron: "*/2 * * * *"
+  push:
+    branches:
+      - main
 
 jobs:
-  Deploy:
-    name: Deploy to EC2
+  run-sagemaker-script:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build & Deploy
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH }}
-          HOSTNAME: ${{ secrets.IP }}
-          USER_NAME: "ec2-user"
+    env:
+      AWS_REGION: <your-region> # Replace with your AWS region
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      SAGEMAKER_INSTANCE_DNS: <sagemaker-instance-dns>  # Replace with your SageMaker instance DNS or IP
+      SAGEMAKER_USERNAME: ec2-user  # Replace with your SageMaker instance username
+      SCRIPT_PATH: script.sh  # Replace with the path to your script on the SageMaker instance
 
+    steps:
+      - name: Configure AWS Credentials
+        run: aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }} && aws configure set region ${{ env.AWS_REGION }}
+
+      - name: Run Script on SageMaker Instance
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
-          echo "Hello World"
+          ssh -i path/to/private-key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} "bash -s" < ${{ env.SCRIPT_PATH }}
