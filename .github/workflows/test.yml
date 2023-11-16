@@ -24,6 +24,7 @@ jobs:
       
       - name: Clone Repository into SageMaker Instance
         run: |
-          ssh -i ${{ secrets.PRIVATE_KEY }} ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} "git clone https://github.com/aruneer007/git-test.git /home/ec2-user"
+          echo "$PRIVATE_KEY" > private_key.pem && chmod 600 private_key.pem
+          ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} "git clone https://github.com/aruneer007/git-test.git /home/ec2-user"
           echo "hello world"
       
