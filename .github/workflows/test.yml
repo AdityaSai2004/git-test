@@ -15,7 +15,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       SAGEMAKER_INSTANCE_DNS: 65.1.225.4  # Replace with your SageMaker instance DNS or IP
       SAGEMAKER_USERNAME: ec2-user  # Replace with your SageMaker instance username
-      SCRIPT_PATH: script.sh  # Replace with the path to your script on the SageMaker instance
+      SCRIPT_PATH: /home/ec2-user/SageMaker/script.sh  # Replace with the path to your script on the SageMaker instance
       PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
     steps:
