@@ -13,7 +13,7 @@ jobs:
       AWS_REGION: ap-south-1 # Replace with your AWS region
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      SAGEMAKER_INSTANCE_DNS: 65.1.225.4  # Replace with your SageMaker instance DNS or IP
+      SAGEMAKER_INSTANCE_DNS: 13.126.13.44      # Replace with your SageMaker instance DNS or IP
       SAGEMAKER_USERNAME: ec2-user  # Replace with your SageMaker instance username
       SCRIPT_PATH: /home/ec2-user/SageMaker/script.sh  # Replace with the path to your script on the SageMaker instance
       PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
@@ -24,7 +24,7 @@ jobs:
       
       - name: Clone Repository into SageMaker Instance
         run: |
-          echo "$PRIVATE_KEY" > private_key.pem && chmod 600 private_key.pem
-          ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} "git clone https://github.com/aruneer007/git-test.git /home/ec2-user"
-          echo "hello world"
+          echo "$PRIVATE_KEY" > private_key.pem && chmod 400 private_key.pem
+          ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
+          mkdir summa
       

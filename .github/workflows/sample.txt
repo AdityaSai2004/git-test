@@ -4,3 +4,5 @@
           ssh -i ${{ env.SPRIVATE_KEY }} ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} "bash -s" < ${{ env.SCRIPT_PATH }}
 
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+
+          "git clone https://github.com/aruneer007/git-test.git /home/ec2-user"
