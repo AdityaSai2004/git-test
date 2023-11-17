@@ -39,4 +39,4 @@ jobs:
           pip install paramiko
 
       - name: Run Python Script
-        run: python hello.py
+        run: python test.py
