@@ -31,4 +31,4 @@ private_key_path = 'private_key.pem'
 with open(private_key_path, 'r') as file:
     pem_contents = file.read()
     print("PEM Contents:")
-    print(pem_contents)
+    print(len(pem_contents))
