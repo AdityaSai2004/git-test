@@ -5,6 +5,7 @@ from base64 import b64decode
 
 # Replace these variables with your actual values
 hostname = '65.1.225.4'
+# 13.126.13.44
 port = 22
 username = 'ec2-user'
 private_key_path = 'private_key.pem'
