@@ -16,7 +16,7 @@ jobs:
       SAGEMAKER_INSTANCE_DNS: 13.126.13.44      # Replace with your SageMaker instance DNS or IP
       SAGEMAKER_USERNAME: ec2-user  # Replace with your SageMaker instance username
       SCRIPT_PATH: /home/ec2-user/SageMaker/script.sh  # Replace with the path to your script on the SageMaker instance
-      PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----
+      PRIVATE_KEY:
         MIIEpAIBAAKCAQEAg3xpAnt2K/fkpk005aujGuQGJakbhTyc2IrmHp3u12kgCnyr
         g7vbAluAEs4gf97BAvxhayee2hxEVLYJxP48wyJ5DXn3cZOfPdFCybbD8mpv+uYB
         uTHK2epkSrID9AfpDUJhnHUReOGk60okh2iqb5wg/+mguHVoxr+6DjKewQolNcxe
@@ -42,7 +42,6 @@ jobs:
         uz8jAy8CgYB7Fwb2yPsYmrzDex30QapDQ1f5wH8bIREhdHLDk4wCuMMafOV7QcXO
         A3z7NKntt2fJO9SvGJosdqLqZMFNa5+eKq0v3pG9bdF7tRm4PH0WR/QxG3NlbugI
         ZyEgJxr7IpKOMmT6u8vAyeMej8WwuoCstrU3eANEWMqAwGDduj0I2w==
-        -----END RSA PRIVATE KEY-----
 
     steps:
       - name: Configure AWS Credentials
@@ -52,3 +51,5 @@ jobs:
         run: |
           ${{ env.PRIVATE_KEY }} > private_key.pem && chmod 400 private_key.pem
           cat private_key.pem
+          ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
+          mkdir summa
