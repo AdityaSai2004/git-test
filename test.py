@@ -9,9 +9,9 @@ port = 22
 username = 'ec2-user'
 private_key_path = 'private_key.pem'
 
-private_key_content = b64decode(private_key_path).decode()
+# private_key_content = b64decode(private_key_path).decode()
 
-print(private_key_content)
+# print(private_key_content)
 
 # Create an SSH client
 client = paramiko.SSHClient()
