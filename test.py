@@ -6,7 +6,7 @@ import os
 hostname = '13.126.13.44'
 port = 22
 username = 'ec2-user'
-private_key_path = 'private-key.pem'
+private_key_path = 'private_key.pem'
 
 # Create an SSH client
 client = paramiko.SSHClient()
