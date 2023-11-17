@@ -23,6 +23,6 @@ jobs:
       
       - name: Clone Repository into SageMaker Instance
         run: |
-          ${{ env.PRIVATE_KEY }} > private_key.pem && chmod 400 private_key.pem
+          ${{ env.PRIVATE_KEY }} > private_key.pem
           ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
           mkdir summa
