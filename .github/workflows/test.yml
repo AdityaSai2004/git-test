@@ -30,8 +30,8 @@ jobs:
       
       - name: Create Private Key File
         run: |
-          echo -n "${{ secrets.PRIVATE_KEY }}" > private-key.pem
-          chmod 400 private-key.pem
+          echo -n "${{ secrets.PRIVATE_KEY }}" > private_key.pem
+          chmod 400 private_key.pem
   
       - name: Install dependencies
         run: |
