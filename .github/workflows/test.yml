@@ -21,10 +21,15 @@ jobs:
       - name: Configure AWS Credentials
         run: aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }} && aws configure set region ${{ env.AWS_REGION }}
       
-      - name: Clone Repository into SageMaker Instance
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
         run: |
-          echo '${{ secrets.PRIVATE_KEY }}' > private_key.pem
-          chmod 400 private_key.pem 
-          cat private_key.pem
-          ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
-          mkdir summa
+          python -m pip install --upgrade pip
+          pip install paramiko
+
+      - name: Run Python Script
+        run: python hello.py
