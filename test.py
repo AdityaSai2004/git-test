@@ -6,29 +6,29 @@ import os
 hostname = '13.126.13.44'
 port = 22
 username = 'ec2-user'
-private_key_path = 'private_key.pem'
+private_key_path = 'private_key2.pem'
 
-# # Create an SSH client
-# client = paramiko.SSHClient()
-# client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# Create an SSH client
+client = paramiko.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-# # Load the private key for authentication
-# private_key = paramiko.RSAKey(filename=private_key_path)
+# Load the private key for authentication
+private_key = paramiko.RSAKey(filename=private_key_path)
 
-# # Connect to the server
-# client.connect(hostname, port=port, username=username, pkey=private_key)
+# Connect to the server
+client.connect(hostname, port=port, username=username, pkey=private_key)
 
-# # Run a command on the server
-# stdin, stdout, stderr = client.exec_command('ls')
+# Run a command on the server
+stdin, stdout, stderr = client.exec_command('ls')
 
-# # Print the output
-# print("Output:")
-# print(stdout.read().decode())
+# Print the output
+print("Output:")
+print(stdout.read().decode())
 
-# # Close the connection
-# client.close()
+# Close the connection
+client.close()
 
-with open(private_key_path, 'r') as file:
-    pem_contents = file.read()
-    print("PEM Contents:")
-    print(len(pem_contents))
+# with open(private_key_path, 'r') as file:
+#     pem_contents = file.read()
+#     print("PEM Contents:")
+#     print(len(pem_contents))
