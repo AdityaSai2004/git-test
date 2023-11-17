@@ -6,3 +6,7 @@
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
 
           "git clone https://github.com/aruneer007/git-test.git /home/ec2-user"
+
+                    echo ${{ env.PRIVATE_KEY }} > private_key.pem && chmod 400 private_key.pem
+          ssh -i private_key.pem ${{ env.SAGEMAKER_USERNAME }}@${{ env.SAGEMAKER_INSTANCE_DNS }} 
+          mkdir summa
