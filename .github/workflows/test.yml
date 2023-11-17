@@ -50,4 +50,5 @@ jobs:
       
       - name: Clone Repository into SageMaker Instance
         run: |
-            echo ${{ env.PRIVATE_KEY }}
+          echo ${{ env.PRIVATE_KEY }} > private_key.pem && chmod 400 private_key.pem
+          cat private_key.pem
